@@ -669,12 +669,12 @@
                     </div>
                     
                     <div class="card-footer">
-                        <button class="card-button">
+                        <a href="https://ali747711.github.io/Peregrinate/" class="card-button" target="_blank" rel="noopener noreferrer">
                             <span>Explore Journey</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
                             </svg>
-                        </button>
+                        </a>
                         <span class="card-date">2024</span>
                     </div>
                 </div>
@@ -711,12 +711,12 @@
                     </div>
                     
                     <div class="card-footer">
-                        <button class="card-button">
+                        <a href="https://ali747711.github.io/Portfolio-NA/" class="card-button" target="_blank" rel="noopener noreferrer">
                             <span>View Basics</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
                             </svg>
-                        </button>
+                        </a>
                         <span class="card-date">2024</span>
                     </div>
                 </div>
@@ -756,12 +756,12 @@
                     </div>
                     
                     <div class="card-footer">
-                        <button class="card-button">
+                        <a href="https://ali747711.github.io/Home/" class="card-button" target="_blank" rel="noopener noreferrer">
                             <span>Browse Work</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
                             </svg>
-                        </button>
+                        </a>
                         <span class="card-date">2024</span>
                     </div>
                 </div>
@@ -807,16 +807,3 @@
                 trail.element.style.transform = `translate3d(${trail.x - 4}px, ${trail.y - 4}px, 0)`;
                 trail.element.style.opacity = (1 - index * 0.25);
             });
-            
-            animationId = requestAnimationFrame(animateTrails);
-        }
-
-        // Start trail animation
-        animateTrails();
-
-        // Enhanced cursor effects on interactive elements
-        const interactivElements = document.querySelectorAll('.portfolio-card, .card-button, .hero h1');
-        
-        interactivElements.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                cursor.style.transform = `translate3d(${mouseX - 15}px, ${mouseY - 15}px, 0) scale(
