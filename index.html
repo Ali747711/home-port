@@ -20,7 +20,7 @@
             cursor: none;
         }
 
-        /* Optimized Custom Cursor - Simplified for Performance */
+        /* Fixed Custom Cursor - Now visible everywhere */
         .cursor {
             position: fixed;
             width: 20px;
@@ -32,9 +32,10 @@
             mix-blend-mode: difference;
             transition: transform 0.1s ease-out;
             will-change: transform;
+            opacity: 1;
         }
 
-        /* Simplified cursor trail - reduced from 8 to 3 for performance */
+        /* Fixed cursor trail - now visible everywhere */
         .cursor-trail {
             position: fixed;
             width: 8px;
@@ -44,6 +45,7 @@
             pointer-events: none;
             z-index: 9999;
             will-change: transform;
+            opacity: 1;
         }
 
         /* Animated Background */
@@ -621,12 +623,12 @@
             <p>Discover my creative journey through these meticulously crafted digital experiences that push the boundaries of innovation and design</p>
             <div class="hero-stats">
                 <div class="stat-item">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Projects</span>
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Portfolios</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">3+</span>
-                    <span class="stat-label">Years</span>
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Projects</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">∞</span>
@@ -648,28 +650,27 @@
                 <div class="card-header">
                     <div class="card-icon">
                         <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                            <polyline points="2,17 12,22 22,17"/>
-                            <polyline points="2,12 12,17 22,12"/>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
                         </svg>
                     </div>
                     <div class="card-status">Featured</div>
                 </div>
                 
                 <div class="card-content">
-                    <h3 class="card-title">Creative Studio</h3>
-                    <p class="card-description">An immersive showcase of innovative design solutions and interactive experiences that challenge conventional boundaries and redefine digital artistry.</p>
+                    <h3 class="card-title">Peregrinate</h3>
+                    <p class="card-description">A comprehensive showcase of my professional background, experiences, and interests. This portfolio represents my journey through various disciplines and highlights my diverse skill set and personal growth.</p>
                     
                     <div class="card-tags">
-                        <span class="tag">Design</span>
-                        <span class="tag">Interactive</span>
-                        <span class="tag">Creative</span>
-                        <span class="tag">Innovation</span>
+                        <span class="tag">Background</span>
+                        <span class="tag">Experience</span>
+                        <span class="tag">Interests</span>
+                        <span class="tag">Professional</span>
                     </div>
                     
                     <div class="card-footer">
                         <button class="card-button">
-                            <span>Explore Project</span>
+                            <span>Explore Journey</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
                             </svg>
@@ -691,28 +692,27 @@
                 <div class="card-header">
                     <div class="card-icon">
                         <svg viewBox="0 0 24 24">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                            <line x1="8" y1="21" x2="16" y2="21"/>
-                            <line x1="12" y1="17" x2="12" y2="21"/>
+                            <path d="M9 12l2 2 4-4"/>
+                            <circle cx="12" cy="12" r="9"/>
                         </svg>
                     </div>
-                    <div class="card-status">Live</div>
+                    <div class="card-status">Simple</div>
                 </div>
                 
                 <div class="card-content">
-                    <h3 class="card-title">Digital Solutions</h3>
-                    <p class="card-description">Cutting-edge web applications engineered with modern technology stacks, delivering seamless user experiences and robust performance optimization.</p>
+                    <h3 class="card-title">Beginner Portfolio</h3>
+                    <p class="card-description">A streamlined version showcasing my foundational experiences and achievements. This simplified portfolio presents my core competencies and milestones in an accessible and clean format perfect for initial introductions.</p>
                     
                     <div class="card-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">Modern</span>
-                        <span class="tag">Performance</span>
+                        <span class="tag">Beginner</span>
+                        <span class="tag">Simple</span>
+                        <span class="tag">Achievements</span>
+                        <span class="tag">Clean</span>
                     </div>
                     
                     <div class="card-footer">
                         <button class="card-button">
-                            <span>View Live Site</span>
+                            <span>View Basics</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
                             </svg>
@@ -734,31 +734,35 @@
                 <div class="card-header">
                     <div class="card-icon">
                         <svg viewBox="0 0 24 24">
-                            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
                         </svg>
                     </div>
-                    <div class="card-status">Award Winner</div>
+                    <div class="card-status">Academic</div>
                 </div>
                 
                 <div class="card-content">
-                    <h3 class="card-title">Brand Identity</h3>
-                    <p class="card-description">Comprehensive branding ecosystems that weave compelling narratives through strategic visual design, creating memorable brand experiences that resonate.</p>
+                    <h3 class="card-title">Class Assignments</h3>
+                    <p class="card-description">A dedicated collection of my academic work featuring organized links to each class assignment. This portfolio demonstrates my learning progression and practical application of concepts across various coursework and projects.</p>
                     
                     <div class="card-tags">
-                        <span class="tag">Branding</span>
-                        <span class="tag">Strategy</span>
-                        <span class="tag">Visual</span>
-                        <span class="tag">Identity</span>
+                        <span class="tag">Academic</span>
+                        <span class="tag">Assignments</span>
+                        <span class="tag">Learning</span>
+                        <span class="tag">Coursework</span>
                     </div>
                     
                     <div class="card-footer">
                         <button class="card-button">
-                            <span>Case Study</span>
+                            <span>Browse Work</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
                             </svg>
                         </button>
-                        <span class="card-date">2023</span>
+                        <span class="card-date">2024</span>
                     </div>
                 </div>
             </div>
@@ -766,13 +770,13 @@
     </div>
 
     <script>
-        // Optimized cursor tracking with reduced complexity
+        // Fixed cursor tracking - now works everywhere on the page
         let cursor = document.querySelector('.cursor');
         let trails = [];
         let mouseX = 0, mouseY = 0;
         let animationId;
 
-        // Reduced cursor trails from 8 to 3 for better performance
+        // Create cursor trails
         for (let i = 0; i < 3; i++) {
             let trail = document.createElement('div');
             trail.className = 'cursor-trail';
@@ -784,16 +788,16 @@
             });
         }
 
-        // Optimized mouse tracking with requestAnimationFrame
+        // Track mouse movement globally
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
             
-            // Direct cursor positioning without transitions for smoother movement
+            // Update cursor position immediately
             cursor.style.transform = `translate3d(${mouseX - 10}px, ${mouseY - 10}px, 0)`;
         });
 
-        // Optimized cursor trail animation
+        // Animate cursor trails
         function animateTrails() {
             trails.forEach((trail, index) => {
                 const lag = 0.15 - index * 0.03;
@@ -810,17 +814,9 @@
         // Start trail animation
         animateTrails();
 
-        // Throttled scroll progress indicator
-        let ticking = false;
-        function updateScrollProgress() {
-            const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-            document.querySelector('.scroll-progress').style.width = scrolled + '%';
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(updateScrollProgress);
-                ticking = true;
-            }
-        });
+        // Enhanced cursor effects on interactive elements
+        const interactivElements = document.querySelectorAll('.portfolio-card, .card-button, .hero h1');
+        
+        interactivElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = `translate3d(${mouseX - 15}px, ${mouseY - 15}px, 0) scale(
