@@ -20,7 +20,7 @@
             cursor: none;
         }
 
-        /* Custom Cursor */
+        /* Optimized Custom Cursor - Simplified for Performance */
         .cursor {
             position: fixed;
             width: 20px;
@@ -30,17 +30,20 @@
             pointer-events: none;
             z-index: 10000;
             mix-blend-mode: difference;
-            transition: all 0.15s ease-out;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
         }
 
+        /* Simplified cursor trail - reduced from 8 to 3 for performance */
         .cursor-trail {
             position: fixed;
             width: 8px;
             height: 8px;
-            background: rgba(100, 164, 255, 0.5);
+            background: rgba(100, 164, 255, 0.3);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
+            will-change: transform;
         }
 
         /* Animated Background */
@@ -563,6 +566,10 @@
             .cursor, .cursor-trail {
                 display: none;
             }
+
+            body {
+                cursor: auto;
+            }
         }
 
         /* Scroll progress indicator */
@@ -759,13 +766,14 @@
     </div>
 
     <script>
-        // Enhanced cursor tracking
+        // Optimized cursor tracking with reduced complexity
         let cursor = document.querySelector('.cursor');
         let trails = [];
         let mouseX = 0, mouseY = 0;
+        let animationId;
 
-        // Create cursor trails
-        for (let i = 0; i < 8; i++) {
+        // Reduced cursor trails from 8 to 3 for better performance
+        for (let i = 0; i < 3; i++) {
             let trail = document.createElement('div');
             trail.className = 'cursor-trail';
             document.body.appendChild(trail);
@@ -776,331 +784,43 @@
             });
         }
 
+        // Optimized mouse tracking with requestAnimationFrame
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
             
-            cursor.style.left = mouseX - 10 + 'px';
-            cursor.style.top = mouseY - 10 + 'px';
+            // Direct cursor positioning without transitions for smoother movement
+            cursor.style.transform = `translate3d(${mouseX - 10}px, ${mouseY - 10}px, 0)`;
         });
 
-        // Animate cursor trails
-        setInterval(() => {
+        // Optimized cursor trail animation
+        function animateTrails() {
             trails.forEach((trail, index) => {
-                trail.x += (mouseX - trail.x) * (0.2 - index * 0.02);
-                trail.y += (mouseY - trail.y) * (0.2 - index * 0.02);
+                const lag = 0.15 - index * 0.03;
+                trail.x += (mouseX - trail.x) * lag;
+                trail.y += (mouseY - trail.y) * lag;
                 
-                trail.element.style.left = trail.x - 4 + 'px';
-                trail.element.style.top = trail.y - 4 + 'px';
-                trail.element.style.opacity = (1 - index * 0.12);
-            });
-        }, 16);
-
-        // Scroll progress indicator
-        window.addEventListener('scroll', () => {
-            const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-            document.querySelector('.scroll-progress').style.width = scrolled + '%';
-        });
-
-        // Enhanced portfolio card interactions
-        document.querySelectorAll('.portfolio-card').forEach(card => {
-            const button = card.querySelector('.card-button');
-            const url = card.dataset.url;
-
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Enhanced click animation
-                button.style.transform = 'scale(0.92)';
-                setTimeout(() => {
-                    button.style.transform = '';
-                    console.log(`Navigating to: ${url}`);
-                    // window.open(url, '_blank');
-                }, 200);
-            });
-
-            // Card click functionality
-            card.addEventListener('click', (e) => {
-                if (!e.target.closest('.card-button')) {
-                    console.log(`Card clicked: ${url}`);
-                    // window.open(url, '_blank');
-                }
-            });
-        });
-
-        // Enhanced 3D mouse tracking with magnetic effect
-        document.querySelectorAll('.portfolio-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 8;
-                const rotateY = (centerX - x) / 8;
-                
-                // Magnetic effect for cursor
-                cursor.style.transform = 'scale(1.5)';
-                cursor.style.background = 'radial-gradient(circle, #9a4fff, #64a4ff)';
-                
-                card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-25px) scale(1.03)`;
+                trail.element.style.transform = `translate3d(${trail.x - 4}px, ${trail.y - 4}px, 0)`;
+                trail.element.style.opacity = (1 - index * 0.25);
             });
             
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
-                cursor.style.transform = '';
-                cursor.style.background = 'radial-gradient(circle, #64a4ff, #1e90ff)';
-            });
-        });
-
-        // Advanced particle generation with physics
-        document.querySelectorAll('.portfolio-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                const particleSystem = card.querySelector('.particle-system');
-                
-                // Generate enhanced particles with different behaviors
-                for (let i = 0; i < 6; i++) {
-                    setTimeout(() => {
-                        const particle = document.createElement('div');
-                        particle.className = 'particle';
-                        
-                        // Random positioning and properties
-                        const startX = Math.random() * 90;
-                        const startY = Math.random() * 90;
-                        const delay = Math.random() * 3;
-                        const duration = 3 + Math.random() * 2;
-                        
-                        particle.style.top = startY + '%';
-                        particle.style.left = startX + '%';
-                        particle.style.animationDelay = delay + 's';
-                        particle.style.animationDuration = duration + 's';
-                        
-                        // Random particle effects
-                        if (Math.random() > 0.5) {
-                            particle.style.background = 'linear-gradient(45deg, #9a4fff, #64a4ff)';
-                        }
-                        
-                        particleSystem.appendChild(particle);
-                        
-                        // Remove particle after animation
-                        setTimeout(() => {
-                            if (particle.parentNode) {
-                                particle.remove();
-                            }
-                        }, (duration + delay) * 1000);
-                    }, i * 150);
-                }
-            });
-        });
-
-        // Intersection observer for enhanced scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                    
-                    // Add staggered animation to tags
-                    const tags = entry.target.querySelectorAll('.tag');
-                    tags.forEach((tag, index) => {
-                        setTimeout(() => {
-                            tag.style.transform = 'translateY(0)';
-                            tag.style.opacity = '1';
-                        }, index * 100);
-                    });
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.portfolio-card').forEach(card => {
-            observer.observe(card);
-            
-            // Initialize tags for animation
-            const tags = card.querySelectorAll('.tag');
-            tags.forEach(tag => {
-                tag.style.transform = 'translateY(20px)';
-                tag.style.opacity = '0';
-                tag.style.transition = 'all 0.4s ease';
-            });
-        });
-
-        // Dynamic background color based on scroll
-        window.addEventListener('scroll', () => {
-            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            const hue = 220 + (scrollPercent * 40); // Shift from blue to purple
-            document.querySelector('.animated-bg').style.filter = `hue-rotate(${hue - 220}deg)`;
-        });
-
-        // Enhanced button interactions
-        document.querySelectorAll('.card-button').forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(2)';
-                cursor.style.background = 'radial-gradient(circle, #ffffff, #64a4ff)';
-                cursor.style.mixBlendMode = 'normal';
-            });
-            
-            button.addEventListener('mouseleave', () => {
-                cursor.style.transform = '';
-                cursor.style.background = 'radial-gradient(circle, #64a4ff, #1e90ff)';
-                cursor.style.mixBlendMode = 'difference';
-            });
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            const cards = document.querySelectorAll('.portfolio-card');
-            let currentIndex = -1;
-            
-            // Find currently focused card
-            cards.forEach((card, index) => {
-                if (card.matches(':focus-within') || card.classList.contains('active')) {
-                    currentIndex = index;
-                }
-            });
-
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                e.preventDefault();
-                const nextIndex = (currentIndex + 1) % cards.length;
-                cards[currentIndex]?.classList.remove('active');
-                cards[nextIndex].classList.add('active');
-                cards[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                e.preventDefault();
-                const prevIndex = currentIndex <= 0 ? cards.length - 1 : currentIndex - 1;
-                cards[currentIndex]?.classList.remove('active');
-                cards[prevIndex].classList.add('active');
-                cards[prevIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else if (e.key === 'Enter' && currentIndex >= 0) {
-                e.preventDefault();
-                cards[currentIndex].click();
-            }
-        });
-
-        // Performance optimization: Throttle expensive operations
-        function throttle(func, limit) {
-            let inThrottle;
-            return function() {
-                const args = arguments;
-                const context = this;
-                if (!inThrottle) {
-                    func.apply(context, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            }
+            animationId = requestAnimationFrame(animateTrails);
         }
 
-        // Apply throttling to scroll and mouse events
-        const throttledScroll = throttle(() => {
+        // Start trail animation
+        animateTrails();
+
+        // Throttled scroll progress indicator
+        let ticking = false;
+        function updateScrollProgress() {
             const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
             document.querySelector('.scroll-progress').style.width = scrolled + '%';
-            
-            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            const hue = scrollPercent * 40;
-            document.querySelector('.animated-bg').style.filter = `hue-rotate(${hue}deg)`;
-        }, 16);
+            ticking = false;
+        }
 
-        window.addEventListener('scroll', throttledScroll);
-
-        // Add ripple effect to cards
-        document.querySelectorAll('.portfolio-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                if (e.target.closest('.card-button')) return;
-                
-                const ripple = document.createElement('div');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: radial-gradient(circle, rgba(100, 164, 255, 0.3), transparent);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                    z-index: 1;
-                `;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // Add CSS animation for ripple effect
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(2);
-                    opacity: 0;
-                }
-            }
-            
-            .portfolio-card.active {
-                border-color: rgba(100, 164, 255, 1);
-                box-shadow: 0 0 30px rgba(100, 164, 255, 0.5);
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Initialize smooth scrolling
-        document.documentElement.style.scrollBehavior = 'smooth';
-
-        // Preload optimization
-        const preloadImages = () => {
-            const imageUrls = [
-                // Add any background images or assets here
-            ];
-            
-            imageUrls.forEach(url => {
-                const img = new Image();
-                img.src = url;
-            });
-        };
-
-        // Initialize everything when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            preloadImages();
-            
-            // Add focus states for accessibility
-            document.querySelectorAll('.portfolio-card').forEach(card => {
-                card.setAttribute('tabindex', '0');
-                card.setAttribute('role', 'button');
-                card.setAttribute('aria-label', `View ${card.querySelector('.card-title').textContent} project`);
-            });
-        });
-
-        // Add touch support for mobile
-        let touchStartY = 0;
-        document.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-        });
-
-        document.addEventListener('touchmove', (e) => {
-            const touchY = e.touches[0].clientY;
-            const diff = touchStartY - touchY;
-            
-            if (Math.abs(diff) > 50) {
-                const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-                document.querySelector('.scroll-progress').style.width = scrolled + '%';
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollProgress);
+                ticking = true;
             }
         });
-    </script>
-</body>
-</html>
